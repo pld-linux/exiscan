@@ -1,4 +1,4 @@
-%include	/usr/lib/rpm/macros.perl    
+%include	/usr/lib/rpm/macros.perl
 Summary:	A EMail Virus Scanner for Exim MTA
 Summary(pl):	Antywirusowy skaner poczty elektronicznej dla Exim MTA
 Name:		exiscan
@@ -8,7 +8,7 @@ URL:		http://duncanthrax.net/exiscan/
 Source0:	http://duncanthrax.net/exiscan/%{name}-v%{version}.tar.gz
 Source1:	%{name}.init
 Patch0:		%{name}-config.patch
-Patch1:         %{name}-user.patch
+Patch1:		%{name}-user.patch
 License:	GPL
 Group:		Applications/Mail
 BuildRequires:	perl-devel
@@ -75,7 +75,7 @@ fi
 %defattr(644,root,root,755)
 %doc CHANGELOG INSTALL README*
 %attr(755,root,root) %{_sbindir}/*
-%attr(640,root,exim) %config(noreplace) %verify(not md5 mtime size) /etc/mail/*.cf
+%attr(640,root,exim) %config(noreplace) %verify(not md5 mtime size) %{_sysconfdir}/mail/*.cf
 %attr(750,exim,root) %{_var}/spool/%{name}
 %attr(754,root,root) /etc/rc.d/init.d/%{name}
 
