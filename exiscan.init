@@ -18,8 +18,8 @@
 # Check that networking is up.
 if is_yes "${NETWORKING}"; then
         if [ ! -f /var/lock/subsys/network ]; then
-                # nls "ERROR: Networking is down. %s can't be run." <service>
-                msg_network_down <service>
+                # nls "ERROR: Networking is down. %s can't be run." exiscan
+                msg_network_down exiscan
                 exit 1
         fi
 else
@@ -32,12 +32,12 @@ case "$1" in
 	# Check if the service is already running?
         if [ ! -f /var/lock/subsys/exiscan ]; then
 		msg_starting exiscan
-		if ! (grep -q "queue_only.*=.*true"); then
+		if ! (grep -q "queue_only.*=.*true" /etc/mail/exim.conf); then
 		    deltext; fail
 		    echo "exim.conf: queue_only = true is missing"
 		    RETVAL=1
 		else
-		    daemon exiscan /etc/mail/exiscan2.cf
+		    daemon exiscan /etc/mail/exiscan.cf
 		    RETVAL=$?
 		fi
     		[ $RETVAL -eq 0 ] && touch /var/lock/subsys/exiscan
