@@ -53,21 +53,21 @@ rm -rf $RPM_BUILD_ROOT
 install -d $RPM_BUILD_ROOT{%{_sbindir},%{_sysconfdir}/{mail,rc.d/init.d}}
 install -d $RPM_BUILD_ROOT%{_var}/spool/%{name}/{checkqueue,virusmails}
 
-install %{SOURCE1}	$RPM_BUILD_ROOT%{_sysconfdir}/rc.d/init.d/%{name}
+install %{SOURCE1}	$RPM_BUILD_ROOT/etc/rc.d/init.d/%{name}
 install exiscan*.pl	$RPM_BUILD_ROOT%{_sbindir}/exiscan
 install exiscan*.cf	$RPM_BUILD_ROOT%{_sysconfdir}/mail/exiscan.cf
 
 %post
 /sbin/chkconfig --add %{name}
 if [ -f %{_var}/lock/subsys/%{name} ]; then
-        %{_sysconfdir}/rc.d/init.d/%{name} restart 1>&2
+        /etc/rc.d/init.d/%{name} restart 1>&2
 else
-        echo "Run \"%{_sysconfdir}/rc.d/init.d/%{name} start\" to start %{name} daemon."
+        echo "Run \"/etc/rc.d/init.d/%{name} start\" to start %{name} daemon."
 fi
 
 %preun
 if [ "$1" = "0" -a -f %{_var}/lock/subsys/%{name} ]; then
-        %{_sysconfdir}/rc.d/init.d/%{name} stop 1>&2
+        /etc/rc.d/init.d/%{name} stop 1>&2
 fi
 /sbin/chkconfig --del %{name}
 
@@ -77,7 +77,7 @@ fi
 %attr(755,root,root) %{_sbindir}/*
 %attr(640,root,exim) %config(noreplace) %verify(not md5 mtime size) /etc/mail/*.cf
 %attr(750,exim,root) %{_var}/spool/%{name}
-%attr(754,root,root) %{_sysconfdir}/rc.d/init.d/%{name}
+%attr(754,root,root) /etc/rc.d/init.d/%{name}
 
 %clean
 rm -rf $RPM_BUILD_ROOT
