@@ -1,0 +1,14 @@
+--- exiscanv2.pl.orig	Fri Nov 23 10:28:26 2001
++++ exiscanv2.pl	Fri May 17 17:49:03 2002
+@@ -31,6 +31,11 @@
+ # chdir to base path, so core files will go into the right directory <g>
+ chdir("$basepath");
+ 
++my ($uid, $gid);
++($uid, $gid) = (getpwnam('exim'))[2,3];
++$( = $) = "$gid $gid";
++$< = $> = $uid;
++
+ # -------------------------------------------------------------------------
+ # sanity checks
+ print "Checking for ripmime .. ";
