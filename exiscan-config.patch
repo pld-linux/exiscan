@@ -1,6 +1,5 @@
-diff -urN exiscan.org/exiscanv2.cf exiscan/exiscanv2.cf
---- exiscan.org/exiscanv2.cf	Thu Sep 13 18:46:27 2001
-+++ exiscan/exiscanv2.cf	Thu Sep 13 18:49:22 2001
+--- exiscan/exiscanv2.cf.orgi	Mon Dec  3 09:19:30 2001
++++ exiscan/exiscanv2.cf	Sun Jun 16 01:07:13 2002
 @@ -16,17 +16,17 @@
  
    # this is where you have put the exiscan package
@@ -36,25 +35,47 @@ diff -urN exiscan.org/exiscanv2.cf exiscan/exiscanv2.cf
  
  
    # ------------------------------------------------------------------
-@@ -70,7 +70,7 @@
-   #    Kapersky's AvpDaemon     | daemon         | avpdaemon
+@@ -78,10 +78,11 @@
+   #    NOD32                    | command line   | nod32
+   #    RAV Antivirus            | command line   | rav
+   #    H+B EDV Antivir          | command line   | antivir
++  #    MKS anti-virus           | command line   | mks
    #    CUSTOM                   | command line   | custom
+ 
    
 -  $scanner="avpdaemon";
-+  $scanner="uvscan";
++  $scanner="mks";
    
    # By using the 'custom' scanner keyword, you can define your own scanner.
    # You'll have to make sure to edit the command line flags for the "custom"
-@@ -83,7 +83,7 @@
+@@ -94,7 +95,7 @@
    # If you use a "daemon" type scanner, this is the path and filename
    # of the UNIX socket used to communicate with the daemon.
  
 -  $scannerex="/opt/AVP/AvpCtl";
-+  $scannerex="/usr/local/bin/uvscan";
++  $scannerex="/usr/local/bin/mks32";
  
  
    # Scanner command line flags
-@@ -177,14 +177,14 @@
+@@ -115,7 +116,8 @@
+                       'nod32'      => '-heursafe -basedir=/usr/local/nod32/nod32 -all <DIRECTORY>',
+                       'rav'        => '-all -listall -mail -smart -unzip <DIRECTORY>',
+                       'antivir'    => '-v -z -allfiles -noboot -s -tmp <DIRECTORY>',
+-                      'custom'     => 'YOUR CMDLINE FLAGS HERE IF USING custom KEYWORD'
++                      'mks'        => '-s <DIRECTORY>/*',
++		       'custom'     => 'YOUR CMDLINE FLAGS HERE IF USING custom KEYWORD'
+                   );
+ 
+ 
+@@ -135,6 +137,7 @@
+                       'nod32'      => ' - ',
+                       'rav'        => 'Infected: [1-9]',
+                       'antivir'    => 'VIRUS',
++		       'mks'        => 'status: virus found:',
+                       'custom'     => 'YOUR REGEXP HERE IF USING custom KEYWORD'
+                    );
+ 
+@@ -268,14 +271,14 @@
    # contain the respective virus themselves ! ;)
    # So, if you get a mail loop on "virus found", please check this setting.
  
