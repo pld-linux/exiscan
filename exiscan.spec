@@ -14,7 +14,8 @@ BuildRequires:	perl-devel
 BuildRequires:	perl-modules
 BuildRequires:	perl-MailTools
 BuildRequires:	perl-Unix-Syslog
-Requires:	exim
+Requires:	exim >= 3.00
+Requires:	exim < 4.00
 # http://www.pldaniels.com/ripmime/
 Requires:	ripmime
 # http://world.std.com/~damned/software.html
