@@ -4,24 +4,25 @@ Summary(pl):	Antywirusowy skaner poczty elektronicznej dla Exim MTA
 Name:		exiscan
 Version:	2.4
 Release:	2
-URL:		http://duncanthrax.net/exiscan/
+License:	GPL
+Group:		Applications/Mail
 Source0:	http://duncanthrax.net/exiscan/%{name}-v%{version}.tar.gz
 # Source0-md5:	aecc3771ee9893167ee4e6a90ff12b1b
 Source1:	%{name}.init
 Patch0:		%{name}-config.patch
 Patch1:		%{name}-user.patch
-License:	GPL
-Group:		Applications/Mail
+URL:		http://duncanthrax.net/exiscan/
 BuildRequires:	perl-devel
 BuildRequires:	perl-modules
 BuildRequires:	perl-MailTools
 BuildRequires:	perl-Unix-Syslog
+PreReq:		rc-scripts
+Requires(post,preun):	/sbin/chkconfig
 Requires:	exim >= 3.00
 # http://www.pldaniels.com/ripmime/
 Requires:	ripmime
 # http://world.std.com/~damned/software.html
 Requires:	tnef
-Prereq:		/sbin/chkconfig
 BuildArch:	noarch
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
@@ -58,6 +59,9 @@ install %{SOURCE1}	$RPM_BUILD_ROOT/etc/rc.d/init.d/%{name}
 install exiscan*.pl	$RPM_BUILD_ROOT%{_sbindir}/exiscan
 install exiscan*.cf	$RPM_BUILD_ROOT%{_sysconfdir}/mail/exiscan.cf
 
+%clean
+rm -rf $RPM_BUILD_ROOT
+
 %post
 /sbin/chkconfig --add %{name}
 if [ -f %{_var}/lock/subsys/%{name} ]; then
@@ -79,6 +83,3 @@ fi
 %attr(640,root,exim) %config(noreplace) %verify(not md5 mtime size) %{_sysconfdir}/mail/*.cf
 %attr(750,exim,root) %{_var}/spool/%{name}
 %attr(754,root,root) /etc/rc.d/init.d/%{name}
-
-%clean
-rm -rf $RPM_BUILD_ROOT
