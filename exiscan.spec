@@ -6,6 +6,7 @@ Version:	2.4
 Release:	2
 URL:		http://duncanthrax.net/exiscan/
 Source0:	http://duncanthrax.net/exiscan/%{name}-v%{version}.tar.gz
+# Source0-md5:	aecc3771ee9893167ee4e6a90ff12b1b
 Source1:	%{name}.init
 Patch0:		%{name}-config.patch
 Patch1:		%{name}-user.patch
