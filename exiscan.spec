@@ -2,12 +2,13 @@
 Summary:	A EMail Virus Scanner for Exim MTA
 Summary(pl):	Antywirusowy skaner poczty elektronicznej dla Exim MTA
 Name:		exiscan
-Version:	2.2
+Version:	2.4
 Release:	1
 URL:		http://duncanthrax.net/exiscan/
 Source0:	http://duncanthrax.net/exiscan/%{name}-v%{version}.tar.gz
 Source1:	%{name}.init
 Patch0:		%{name}-config.patch
+Patch1:         %{name}-user.patch
 License:	GPL
 Group:		Applications/Mail
 BuildRequires:	perl-devel
@@ -45,6 +46,7 @@ skanowaæ wiadomo¶ci opakowane za pomoc± MS-TNEF oraz SMIME
 %prep
 %setup -q -n %{name}
 %patch0 -p1
+%patch1 -p0
 
 %install
 rm -rf $RPM_BUILD_ROOT
@@ -53,10 +55,8 @@ install -d $RPM_BUILD_ROOT{%{_sbindir},%{_sysconfdir}/{mail,rc.d/init.d}}
 install -d $RPM_BUILD_ROOT%{_var}/spool/%{name}/{checkqueue,virusmails}
 
 install %{SOURCE1}	$RPM_BUILD_ROOT%{_sysconfdir}/rc.d/init.d/%{name}
-install exiscan*.pl	$RPM_BUILD_ROOT%{_sbindir}
-install exiscan*.cf	$RPM_BUILD_ROOT%{_sysconfdir}/mail
-
-gzip -9nf CHANGELOG INSTALL README*
+install exiscan*.pl	$RPM_BUILD_ROOT%{_sbindir}/exiscan
+install exiscan*.cf	$RPM_BUILD_ROOT%{_sysconfdir}/mail/exiscan.cf
 
 %post
 /sbin/chkconfig --add %{name}
@@ -74,9 +74,9 @@ fi
 
 %files
 %defattr(644,root,root,755)
-%doc *.gz
+%doc CHANGELOG INSTALL README*
 %attr(755,root,root) %{_sbindir}/*
-%attr(640,root,root) %config(noreplace) %verify(not md5 mtime size) /etc/mail/*.cf
+%attr(640,root,exim) %config(noreplace) %verify(not md5 mtime size) /etc/mail/*.cf
 %attr(750,exim,root) %{_var}/spool/%{name}
 %attr(754,root,root) %{_sysconfdir}/rc.d/init.d/%{name}
 
