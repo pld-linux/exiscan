@@ -1,0 +1,73 @@
+diff -urN exiscan.org/exiscanv2.cf exiscan/exiscanv2.cf
+--- exiscan.org/exiscanv2.cf	Thu Sep 13 18:46:27 2001
++++ exiscan/exiscanv2.cf	Thu Sep 13 18:49:22 2001
+@@ -16,17 +16,17 @@
+ 
+   # this is where you have put the exiscan package
+ 
+-  $basepath="/usr/exim/exiscan";
++  $basepath="/var/spool/exiscan";
+ 
+   # exims queue directory
+ 
+-  $queuedir="/usr/exim/spool/input";
++  $queuedir="/var/spool/exim/input";
+ 
+   # the ripmime executable. as of exiscan 1.0, this is the preferred
+   # MIME unpacker. Get it at http://www.pldaniels.com/ripmime/
+   # Thanks to PL Daniels for making this thing public.
+ 
+-  $ripmime = "/usr/local/bin/ripmime";
++  $ripmime = "/usr/bin/ripmime";
+ 
+   # the reformime executable. Another MIME mail unpacker.
+   # This is NOT needed if you have defined ripmime above !
+@@ -43,11 +43,11 @@
+   # This will enable exiscan to look into these obsfucated
+   # mails :) Set this to "0" if you do not want tnef support.
+ 
+-  $tnef = "/usr/local/bin/tnef";
++  $tnef = "/usr/bin/tnef";
+ 
+   # the exim executable
+ 
+-  $exim="/usr/exim/bin/exim";
++  $exim="/usr/bin/exim";
+ 
+ 
+   # ------------------------------------------------------------------
+@@ -70,7 +70,7 @@
+   #    Kapersky's AvpDaemon     | daemon         | avpdaemon
+   #    CUSTOM                   | command line   | custom
+   
+-  $scanner="avpdaemon";
++  $scanner="uvscan";
+   
+   # By using the 'custom' scanner keyword, you can define your own scanner.
+   # You'll have to make sure to edit the command line flags for the "custom"
+@@ -83,7 +83,7 @@
+   # If you use a "daemon" type scanner, this is the path and filename
+   # of the UNIX socket used to communicate with the daemon.
+ 
+-  $scannerex="/opt/AVP/AvpCtl";
++  $scannerex="/usr/local/bin/uvscan";
+ 
+ 
+   # Scanner command line flags
+@@ -177,14 +177,14 @@
+   # contain the respective virus themselves ! ;)
+   # So, if you get a mail loop on "virus found", please check this setting.
+ 
+-  $postmaster="postmaster\@eurescom.de";
++  $postmaster="postmaster\@localhost";
+ 
+ 
+   # the "from" name and address used when sending notifications to
+   # users and the postmaster. You can also set it to the same
+   # address as the $postmaster setting.
+   
+-  $fromaddress="exiscan\@eurescom.de";
++  $fromaddress="exiscan\@localhost";
+   
+   
+   # exiscan has 2 methods of sending notification emails:
