@@ -3,7 +3,7 @@ Summary:	A EMail Virus Scanner for Exim MTA
 Summary(pl):	Antywirusowy skaner poczty elektronicznej dla Exim MTA
 Name:		exiscan
 Version:	2.4
-Release:	1
+Release:	2
 URL:		http://duncanthrax.net/exiscan/
 Source0:	http://duncanthrax.net/exiscan/%{name}-v%{version}.tar.gz
 Source1:	%{name}.init
@@ -16,7 +16,6 @@ BuildRequires:	perl-modules
 BuildRequires:	perl-MailTools
 BuildRequires:	perl-Unix-Syslog
 Requires:	exim >= 3.00
-Requires:	exim < 4.00
 # http://www.pldaniels.com/ripmime/
 Requires:	ripmime
 # http://world.std.com/~damned/software.html
