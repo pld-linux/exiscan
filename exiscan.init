@@ -32,7 +32,7 @@ case "$1" in
 	# Check if the service is already running?
         if [ ! -f /var/lock/subsys/exiscan ]; then
 		msg_starting exiscan
-		if ! (grep -q "queue_only.*=.*true" /etc/mail/exim.conf); then
+		if ! (/usr/bin/exim -bP | grep -q "^queue_only$"); then
 		    deltext; fail
 		    echo "exim.conf: queue_only = true is missing"
 		    RETVAL=1
