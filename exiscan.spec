@@ -10,9 +10,6 @@ Source1:	%{name}.init
 Patch0:		%{name}-config.patch
 License:	GPL
 Group:		Applications/Mail
-Group(de):	Applikationen/Post
-Group(pl):	Aplikacje/Poczta
-Group(pt):	Aplicações/Correio Eletrônico
 BuildRequires:	perl-devel
 BuildRequires:	perl-modules
 BuildRequires:	perl-MailTools
