@@ -26,6 +26,7 @@ else
 	exit 0
 fi
 
+RETVAL=0
 # See how we were called.
 case "$1" in
   start)
@@ -33,7 +34,6 @@ case "$1" in
 	if [ ! -f /var/lock/subsys/exiscan ]; then
 		msg_starting exiscan
 		if ! (/usr/bin/exim -bP | grep -q "^queue_only$"); then
-			deltext
 			fail
 			nls "exim.conf: queue_only = true is missing"
 			RETVAL=1
@@ -44,7 +44,6 @@ case "$1" in
 		[ $RETVAL -eq 0 ] && touch /var/lock/subsys/exiscan
 	else
 		msg_already_running exiscan
-		exit 1
 	fi
 	;;
   stop)
@@ -55,22 +54,20 @@ case "$1" in
 		rm -f /var/lock/subsys/exiscan > /dev/null 2>&1
 	else
 		msg_not_running exiscan
-		exit 1
 	fi
 	;;
   status)
 	status exiscan
-	RETVAL=$?
-	exit $RETVAL
+	exit $?
 	;;
-  restart|reload)
+  restart|force-reload)
 	$0 stop
 	$0 start
+	exit $?
 	;;
   *)
-	msg_usage "$0 {start|stop|restart|reload|status}"
-	exit 1
-	;;
+	msg_usage "$0 {start|stop|restart|force-reload|status}"
+	exit 3
 esac
 
 exit $RETVAL
