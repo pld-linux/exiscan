@@ -12,10 +12,9 @@ Source1:	%{name}.init
 Patch0:		%{name}-config.patch
 Patch1:		%{name}-user.patch
 URL:		http://duncanthrax.net/exiscan/
-BuildRequires:	perl-devel
-BuildRequires:	perl-modules
 BuildRequires:	perl-MailTools
 BuildRequires:	perl-Unix-Syslog
+BuildRequires:	rpm-perlprov
 PreReq:		rc-scripts
 Requires(post,preun):	/sbin/chkconfig
 Requires:	exim >= 3.00
