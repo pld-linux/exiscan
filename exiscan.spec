@@ -1,6 +1,6 @@
 %include	/usr/lib/rpm/macros.perl
 Summary:	An EMail Virus Scanner for Exim MTA
-Summary(pl):	Antywirusowy skaner poczty elektronicznej dla Exim MTA
+Summary(pl.UTF-8):   Antywirusowy skaner poczty elektronicznej dla Exim MTA
 Name:		exiscan
 Version:	2.4
 Release:	2
@@ -33,14 +33,14 @@ scanning of mail, with a configurable number of processes. Exiscan has
 generic support for available command line virus scanners. Exiscan can
 scan inside of MS-TNEF and SMIME (signed) wrapped messages.
 
-%description -l pl
-Exiscan to antywirusowy skaner poczty dzia³aj±cy wraz z MTA Exim
-(http://www.exim.org). Exiscan zosta³ napisany w Perlu oraz
-zaprojektowany tak by byæ bardzo ³atwym w u¿yciu. Exiscan wspiera
-wielow±tkowe rozpakowywanie i skanowanie poczty z konfigurowalnym
-ograniczeniem ilo¶ci procesów. Exiscan mo¿e wspó³pracowaæ z wieloma
-skanerami antywirusowymi wywo³ywanymi z lini poleceñ. Exiscan mo¿e
-skanowaæ wiadomo¶ci opakowane za pomoc± MS-TNEF oraz SMIME
+%description -l pl.UTF-8
+Exiscan to antywirusowy skaner poczty dziaÅ‚ajÄ…cy wraz z MTA Exim
+(http://www.exim.org). Exiscan zostaÅ‚ napisany w Perlu oraz
+zaprojektowany tak by byÄ‡ bardzo Å‚atwym w uÅ¼yciu. Exiscan wspiera
+wielowÄ…tkowe rozpakowywanie i skanowanie poczty z konfigurowalnym
+ograniczeniem iloÅ›ci procesÃ³w. Exiscan moÅ¼e wspÃ³Å‚pracowaÄ‡ z wieloma
+skanerami antywirusowymi wywoÅ‚ywanymi z lini poleceÅ„. Exiscan moÅ¼e
+skanowaÄ‡ wiadomoÅ›ci opakowane za pomocÄ… MS-TNEF oraz SMIME
 (podpisane).
 
 %prep
