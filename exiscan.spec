@@ -15,7 +15,8 @@ URL:		http://duncanthrax.net/exiscan/
 BuildRequires:	perl-MailTools
 BuildRequires:	perl-Unix-Syslog
 BuildRequires:	rpm-perlprov
-PreReq:		rc-scripts
+BuildRequires:	rpmbuild(macros) >= 1.268
+Requires:	rc-scripts
 Requires(post,preun):	/sbin/chkconfig
 Requires:	exim >= 3.00
 # http://www.pldaniels.com/ripmime/
@@ -63,17 +64,13 @@ rm -rf $RPM_BUILD_ROOT
 
 %post
 /sbin/chkconfig --add %{name}
-if [ -f %{_var}/lock/subsys/%{name} ]; then
-	/etc/rc.d/init.d/%{name} restart 1>&2
-else
-	echo "Run \"/etc/rc.d/init.d/%{name} start\" to start %{name} daemon."
-fi
+%service exiscan restart
 
 %preun
 if [ "$1" = "0" -a -f %{_var}/lock/subsys/%{name} ]; then
-	/etc/rc.d/init.d/%{name} stop 1>&2
+	%service exiscan stop
+	/sbin/chkconfig --del %{name}
 fi
-/sbin/chkconfig --del %{name}
 
 %files
 %defattr(644,root,root,755)
