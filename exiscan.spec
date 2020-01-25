@@ -1,4 +1,3 @@
-%include	/usr/lib/rpm/macros.perl
 Summary:	An EMail Virus Scanner for Exim MTA
 Summary(pl.UTF-8):	Antywirusowy skaner poczty elektronicznej dla Exim MTA
 Name:		exiscan
